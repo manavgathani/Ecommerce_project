@@ -1,0 +1,109 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+
+    </head>
+	<body>
+		<!-- HEADER -->
+	
+		<!-- /NAVIGATION -->
+
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="breadcrumb-header">Profile</h3>
+						<ul class="breadcrumb-tree">
+							<li><a href="#">Home</a></li>
+							<li class="active">Profile</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<div class="col-md-7">
+						<!-- Billing Details -->
+						<div class="billing-details">
+                            {% if msg %}
+                                <b style="color: blue;">{{msg}}</b>
+                            {% endif %}
+							<form name="signup" action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+							<div class="form-group">
+								<input class="input" type="text" name="fname" value="{{user.fname}}">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="lname" value="{{user.lname}}">
+							</div>
+							<div class="form-group">
+								<input class="input" type="email" name="email" value="{{user.email}}" readonly>
+							</div>
+                            <div class="form-group">
+								<input class="input" type="text" name="mobile" value="{{user.mobile}}">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="address" value="{{user.address}}">
+							</div>
+                            <div class="form-group">
+                                <img src="{{user.profile_pic.url}}" width="100px" height="100px">
+                            </div>
+
+							<div class="form-group">
+								<input class="input" type="file" name="profile_pic">
+							</div>
+
+                            <div class="form-group">
+								<input class="btn btn-primary" type="submit" name="action" value="Update Profile">
+							</div>
+							
+							</div>
+						</div>
+                    </form>
+						<!-- /Billing Details -->
+
+						<!-- Shiping Details -->
+						
+						<!-- /Shiping Details -->
+
+						<!-- Order notes -->
+					
+						<!-- /Order notes -->
+					
+
+					<!-- Order Details -->
+					
+					<!-- /Order Details -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		<!-- NEWSLETTER -->
+		
+		<!-- /NEWSLETTER -->
+
+		<!-- FOOTER -->
+		
+	</body>
+</html>
+{% endblock %}

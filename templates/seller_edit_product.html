@@ -1,0 +1,127 @@
+{% extends 'seller_header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+
+    </head>
+	<body>
+		<!-- HEADER -->
+	
+		<!-- /NAVIGATION -->
+
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="breadcrumb-header">EDIT Product</h3>
+						<ul class="breadcrumb-tree">
+							<li><a href="#">Home</a></li>
+							<li class="active">EDIT Product</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<div class="col-md-7">
+						<!-- Billing Details -->
+						<div class="billing-details">
+                            {% if msg %}
+                                <b style="color: blue;">{{msg}}</b>
+                            {% endif %}
+							<form name="signup" action="{% url 'seller_edit_product' pk=product.pk %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+
+								<div class="form-group">
+									<select name="product_category" class="input">
+                                        {% if product.product_category == "Laptop" %}
+                                        <option>---Select Product Category---</option>
+										<option value="Laptop" selected>Laptop</option>
+										<option value="Accessories">Accessories</option>
+                                        <option value="Camera">Camera</option>
+                                        {% elif product.product_category == "Accessories" %}
+                                        <option>---Select Product Category---</option>
+										<option value="Laptop">Laptop</option>
+										<option value="Accessories" selected>Accessories</option>
+                                        <option value="Camera">Camera</option>
+                                        {% elif product.product_category == "Camera" %}
+                                        <option>---Select Product Category---</option>
+										<option value="Laptop">Laptop</option>
+										<option value="Accessories">Accessories</option>
+                                        <option value="Camera" selected>Camera</option>
+										<option>---Select Product Category---</option>
+										<option value="Laptop">Laptop</option>
+										<option value="Accessories">Accessories</option>
+                                        <option value="Camera">Camera</option>
+                                        {% endif %}
+									</select>
+								</div>
+							<div class="form-group">
+								<input class="input" type="text" name="product_name" value="{{product.product_name}}">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="product_price" value="{{product.product_price}}">
+							</div>
+							
+							<div class="form-group">
+								<input class="input" type="text" name="product_desc" placeholder="Product Description" value="{{product.product_desc}}">
+							</div>
+                            <img src="{{product.product_image.url}}" height="100px" width="100px">
+                           
+							<div class="form-group">
+								<input class="input" type="file" name="product_image">
+							</div>
+
+                            <div class="form-group">
+								<input class="btn btn-primary" type="submit" name="action" value="Edit Product">
+							</div>
+							
+							</div>
+						</div>
+                    </form>
+						<!-- /Billing Details -->
+
+						<!-- Shiping Details -->
+						
+						<!-- /Shiping Details -->
+
+						<!-- Order notes -->
+					
+						<!-- /Order notes -->
+					
+
+					<!-- Order Details -->
+					
+					<!-- /Order Details -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		<!-- NEWSLETTER -->
+		
+		<!-- /NEWSLETTER -->
+
+		<!-- FOOTER -->
+		
+	</body>
+</html>
+{% endblock %}

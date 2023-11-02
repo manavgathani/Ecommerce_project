@@ -1,0 +1,120 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+
+    </head>
+	<body>
+		<!-- HEADER -->
+	
+		<!-- /NAVIGATION -->
+
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="breadcrumb-header">Signup</h3>
+						<ul class="breadcrumb-tree">
+							<li><a href="#">Home</a></li>
+							<li class="active">Signup</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<div class="col-md-7">
+						<!-- Billing Details -->
+						<div class="billing-details">
+                            {% if msg %}
+                                <b style="color: blue;">{{msg}}</b>
+                            {% endif %}
+							<form name="signup" action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+
+								<div class="form-group">
+									<select name="usertype" class="input">
+										<option>---Select User Type---</option>
+										<option value="buyer">Buyer</option>
+										<option value="seller">Seller</option>
+									</select>
+								</div>
+							<div class="form-group">
+								<input class="input" type="text" name="fname" placeholder="First Name">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="lname" placeholder="Last Name">
+							</div>
+							<div class="form-group">
+								<input class="input" type="email" name="email" placeholder="Email">
+							</div>
+                            <div class="form-group">
+								<input class="input" type="text" name="mobile" placeholder="Mobile">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="address" placeholder="Address">
+							</div>
+                            <div class="form-group">
+								<input class="input" type="password" name="password" placeholder="Password">
+							</div>
+
+                            <div class="form-group">
+								<input class="input" type="password" name="cpassword" placeholder="Confirm Password">
+							</div>
+							<div class="form-group">
+								<input class="input" type="file" name="profile_pic">
+							</div>
+
+                            <div class="form-group">
+								<input class="btn btn-primary" type="submit" name="action" value="Sign Up">
+							</div>
+							
+							</div>
+						</div>
+                    </form>
+						<!-- /Billing Details -->
+
+						<!-- Shiping Details -->
+						
+						<!-- /Shiping Details -->
+
+						<!-- Order notes -->
+					
+						<!-- /Order notes -->
+					
+
+					<!-- Order Details -->
+					
+					<!-- /Order Details -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		<!-- NEWSLETTER -->
+		
+		<!-- /NEWSLETTER -->
+
+		<!-- FOOTER -->
+		
+	</body>
+</html>
+{% endblock %}
