@@ -1,0 +1,145 @@
+{% extends 'header.html' %}	
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+		<script src="https://js.stripe.com/v3/"></script>
+    </head>
+	<body>
+		<!-- HEADER -->
+	
+		<!-- /NAVIGATION -->
+
+		
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<!-- section title -->  
+					<div class="col-md-12">
+						<div class="section-title">
+                            {% if carts %}
+                            <h3 class="title">Total Products - {{carts.count}}</h3>
+                            {% else %}
+                            <h3 class="title">No Products in Cart</h3>
+                            {% endif %}
+							
+							<div class="section-nav">
+								<ul class="section-tab-nav tab-nav">
+									<li class="active"><a href="">All</a></li>
+									<li><a href="{% url 'seller_view_laptop' %}">Laptop</a></li>
+									<li><a href="{% url 'seller_view_camera' %}">Cameras</a></li>
+									<li><a href="{% url 'seller_view_accessories' %}">Accessories</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /section title -->
+
+					<!-- Products tab & slick -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="products-tabs">
+								<!-- tab -->
+								<div id="tab1" class="tab-pane active">
+									<div class="products-slick" data-nav="#slick-nav-1">
+										<!-- product -->
+                                        {% for i in carts %}
+										<div class="product">
+											<div class="product-img">
+												<img src="{{i.product.product_image.url}}" width="250px" height="250px">
+												<div class="product-label">
+													<span class="sale">-30%</span>
+													<span class="new">NEW</span>
+												</div>
+											</div>
+											<div class="product-body">
+												<p class="product-category">{{i.product.product_category}}</p>
+												<h3 class="product-name"><a href="#">{{i.product.product_name}}</a></h3>
+												<h4 class="product-price">Product Price: {{i.product_price}}</h4>
+												<form method="post" action="{% url 'change_qty' %}">
+													{% csrf_token %}
+														<h4  class="product-price">Product Qty</h4><input type="number" name="product_qty" value="{{i.product_qty}}" min="1" max="10" onchange="this.form.submit();">
+														<input type="hidden" name="pk" value="{{i.pk}}" >
+												</form>
+												<h4 class="product-price">Total Price: {{i.total_price}}</h4>
+												<div class="product-rating">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+												</div>
+											
+											</div>
+											<div class="add-to-cart">
+												<a href="{% url 'product_details' pk=i.pk %}"><button class="add-to-cart-btn">Product Details</button></a>
+											</div>
+										</div>
+                                        {% endfor %}
+										<!-- /product -->
+
+										
+									</div>
+									<div id="slick-nav-1" class="products-slick-nav"></div>
+								</div>
+								<!-- /tab -->
+							</div>
+						</div>
+					</div>
+					<!-- Products tab & slick -->
+				</div>
+				<!-- /row -->
+
+				<h1>Netprice:{{net_price}}</h1>
+				<form method="post">
+					{% csrf_token %}
+						<input type="hidden" id="net_price" name="amount" value="{{net_price}}">
+						<button type="button" class="btn btn-lg btn-primary" id="checkout-button">Checkout</button>
+				</form>
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+	<script type="text/javascript">
+			var stripe=Stripe('pk_test_51O9sJPSDaj9kjgz1JZYHLZ2ppmsxQIiWhGGGEoQWf8gwd8ommMX0yNCb7KjEtTvfS8PwNgVv4eaoSIDfXbZKhXm100Ka9Rooqz');
+
+			var checkoutButton=document.getElementById('checkout-button');
+
+			checkoutButton.addEventListener('click',function(){
+				fetch('/create-checkout-session/',{
+					method:'POST',
+					headers:{
+						'Accept':'application/json',
+						'X-Requested-With':'XMLHttpRequest',
+					},
+					body:JSON.stringify({'post_data':'{{net_price}}'})
+				})
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(session){
+				return stripe.redirectToCheckout({sessionId:session.id});
+			})
+			.then(function(result){
+				if(result.error){
+					alert(result.error.message);
+				}
+			})
+			.catch(function(error){
+				console.error('Error:',error);
+			});
+			});
+	</script>
+		
+		
+
+	</body>
+</html>
+{% endblock %}

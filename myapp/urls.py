@@ -15,5 +15,22 @@ urlpatterns = [
    path('seller_view_product/',views.seller_view_product,name='seller_view_product'),
    path('seller_product_details/<int:pk>/',views.seller_product_details,name='seller_product_details'),
    path('seller_edit_product/<int:pk>/',views.seller_edit_product,name='seller_edit_product'),
-    path('seller_delete_product/<int:pk>/',views.seller_delete_product,name='seller_delete_product'),
+   path('seller_delete_product/<int:pk>/',views.seller_delete_product,name='seller_delete_product'),
+   path('seller_view_laptop/',views.seller_view_laptop,name='seller_view_laptop'),
+   path('seller_view_camera/',views.seller_view_camera,name='seller_view_camera'),
+   path('seller_view_accessories/',views.seller_view_accessories,name='seller_view_accessories'),
+   path('product_details/<int:pk>/',views.product_details,name='product_details'),
+   path('add_to_wishlist/<int:pk>/',views.add_to_wishlist,name='add_to_wishlist'),
+   path('wishlist/',views.wishlist,name='wishlist'),
+   path('remove_from_wishlist/<int:pk>/',views.remove_from_wishlist,name='remove_from_wishlist'),
+   path('add_to_cart/<int:pk>/',views.add_to_cart,name='add_to_cart'),
+   path('cart/',views.cart,name='cart'),
+   path('remove_from_cart/<int:pk>/',views.remove_from_cart,name='remove_from_cart'),
+   path('change_qty/',views.change_qty,name='change_qty'),
+   path('create-checkout-session/',views.create_checkout_session,name='payment'),
+   path('success.html/',views.success,name='success'),
+   path('cancel.html/',views.cancel,name='cancel'),
+   path('myorder/',views.myorder,name='myorder'),
+   
+    
 ]

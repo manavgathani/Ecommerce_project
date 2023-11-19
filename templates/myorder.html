@@ -5,7 +5,7 @@
 <html lang="en">
 	<head>
 		
-
+		<script src="https://js.stripe.com/v3/"></script>
     </head>
 	<body>
 		<!-- HEADER -->
@@ -21,10 +21,15 @@
 				<!-- row -->
 				<div class="row">
 
-					<!-- section title -->
+					<!-- section title -->  
 					<div class="col-md-12">
 						<div class="section-title">
-							<h3 class="title">Total Products - {{products.count}}</h3>
+                            {% if carts %}
+                            <h3 class="title">Total Products - {{carts.count}}</h3>
+                            {% else %}
+                            <h3 class="title">No Products in Orders</h3>
+                            {% endif %}
+							
 							<div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
 									<li class="active"><a href="">All</a></li>
@@ -45,19 +50,25 @@
 								<div id="tab1" class="tab-pane active">
 									<div class="products-slick" data-nav="#slick-nav-1">
 										<!-- product -->
-                                        {% for i in products %}
+                                        {% for i in carts %}
 										<div class="product">
 											<div class="product-img">
-												<img src="{{i.product_image.url}}" width="250px" height="250px">
+												<img src="{{i.product.product_image.url}}" width="250px" height="250px">
 												<div class="product-label">
 													<span class="sale">-30%</span>
 													<span class="new">NEW</span>
 												</div>
 											</div>
 											<div class="product-body">
-												<p class="product-category">{{i.product_category}}</p>
-												<h3 class="product-name"><a href="#">{{i.product_name}}</a></h3>
-												<h4 class="product-price">{{i.product_price}}</h4>
+												<p class="product-category">{{i.product.product_category}}</p>
+												<h3 class="product-name"><a href="#">{{i.product.product_name}}</a></h3>
+												<h4 class="product-price">Product Price: {{i.product_price}}</h4>
+												<form method="post" action="{% url 'change_qty' %}">
+													{% csrf_token %}
+														<h4  class="product-price">Product Qty</h4><input type="number" name="product_qty" value="{{i.product_qty}}" min="1" max="10" onchange="this.form.submit();" readonly>
+														<input type="hidden" name="pk" value="{{i.pk}}" >
+												</form>
+												<h4 class="product-price">Total Price: {{i.total_price}}</h4>
 												<div class="product-rating">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>

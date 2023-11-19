@@ -52,7 +52,7 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="#" class="logo">
+								<a href="/" class="logo">
 									<img src="/static/./img/logo.png" alt="">
 								</a>
 							</div>
@@ -110,12 +110,19 @@
 										</a>
 									</div>
 								{% endif %}
+								<div>
+									<a href="{% url 'myorder' %}">
+										<i class="fa fa-cart-plus"></i>
+										<span>Your Orders</span>
+										
+									</a>
+								</div>
                                
 								<div>
-									<a href="#">
+									<a href="{% url 'wishlist' %}">
 										<i class="fa fa-heart-o"></i>
 										<span>Your Wishlist</span>
-										<div class="qty">2</div>
+										<div class="qty">{{request.session.wishlist_count}}</div>
 									</a>
 								</div>
 								<!-- /Wishlist -->
@@ -125,7 +132,7 @@
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
-										<div class="qty">3</div>
+										<div class="qty">{{request.session.cart_count}}</div>
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">
@@ -148,15 +155,15 @@
 													<h3 class="product-name"><a href="#">product name goes here</a></h3>
 													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
 												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
+												<a href=""><button class="delete"><i class="fa fa-close"></i></button></a>
 											</div>
 										</div>
 										<div class="cart-summary">
 											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
+											<h5>SUBTOTAL: {{net_price}}</h5>
 										</div>
 										<div class="cart-btns">
-											<a href="#">View Cart</a>
+											<a href="{% url 'cart' %}">View Cart</a>
 											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>

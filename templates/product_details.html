@@ -1,0 +1,143 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+    </head>
+	<body>
+		
+			
+						<!-- /LOGO -->
+
+									<div class="cart-dropdown">
+										<div class="cart-list">
+											<div class="product-widget">
+												<div class="product-img">
+													<img src="./img/product01.png" alt="">
+												</div>
+												<div class="product-body">
+													<h3 class="product-name"><a href="#">product name goes here</a></h3>
+													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+												</div>
+												<button class="delete"><i class="fa fa-close"></i></button>
+											</div>
+
+											<div class="product-widget">
+												<div class="product-img">
+													<img src="./img/product02.png" alt="">
+												</div>
+												<div class="product-body">
+													<h3 class="product-name"><a href="#">product name goes here</a></h3>
+													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
+												</div>
+												<button class="delete"><i class="fa fa-close"></i></button>
+											</div>
+										</div>
+										<div class="cart-summary">
+											<small>3 Item(s) selected</small>
+											<h5>SUBTOTAL: $2940.00</h5>
+										</div>
+										<div class="cart-btns">
+											<a href="#">View Cart</a>
+											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+										</div>
+									</div>
+								</div>
+								<!-- /Cart -->
+
+							
+
+		
+
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb-tree">
+							<li><a href="#">Home</a></li>
+							
+							<li class="active">{{product.product_name}}</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- Product main img -->
+					<div class="col-md-5 col-md-push-2">
+						<div id="product-main-img">
+							<div class="product-preview">
+								<img src="{{product.product_image.url}}" alt="">
+							</div>
+                        </div>
+							
+					</div>
+					<!-- /Product main img -->
+
+					<!-- Product thumb imgs -->
+					<div class="col-md-2  col-md-pull-5">
+						<div id="product-imgs">
+							<div class="product-preview">
+								<img src="{{product.product_image.url}}" alt="">
+							</div>
+
+						</div>
+					</div>
+					<!-- /Product thumb imgs -->
+
+					<!-- Product details -->
+					<div class="col-md-5">
+						<div class="product-details">
+							<h2 class="product-name">{{product.product_name}}</h2>
+							
+							<div>
+								<h3 class="product-price">{{product.product_price}}</h3>
+								<span class="product-available">In Stock</span>
+							</div>
+							<p>{{product.product_desc}}</p>
+
+							{% if cart_flag == True %}
+							<a href="{% url 'remove_from_cart' pk=product.pk %}"><input type="button" class="btn btn-danger" value="Remove From Cart"></a>
+							{% else %}
+							<a href="{% url 'add_to_cart' pk=product.pk %}"><input type="button" class="btn btn-primary" value="Add to Cart"></a>
+							{% endif %}
+				
+							
+
+							{% if wishlist_flag == True %}
+							<a href="{% url 'remove_from_wishlist' pk=product.pk %}"><input type="button" class="btn btn-danger" value="Remove From Wishlist"></a>
+							{% else %}
+							<a href="{% url 'add_to_wishlist' pk=product.pk %}"><input type="button" class="btn btn-primary" value="Add to Wishlist"></a>
+							{% endif %}
+				
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+        </div>
+        </div>
+        
+		<!-- Section -->
+	
+
+		
+		
+	</body>
+</html>
+{% endblock %}
