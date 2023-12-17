@@ -31,6 +31,7 @@ urlpatterns = [
    path('success.html/',views.success,name='success'),
    path('cancel.html/',views.cancel,name='cancel'),
    path('myorder/',views.myorder,name='myorder'),
+   path('seller_view_order/',views.seller_view_order,name='seller_view_order'),
    
     
 ]

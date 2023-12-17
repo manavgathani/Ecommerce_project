@@ -362,3 +362,13 @@ def myorder(request):
     # user=User.objects.get(email=request.session['email'])
     carts=Cart.objects.filter(payment_status=True)
     return render(request,'myorder.html',{'carts':carts})
+
+def seller_view_order(request):
+    myorder=[]
+    seller=User.objects.get(email=request.session['email'])
+    carts=Cart.objects.filter(payment_status=True)
+    for i in carts:
+        if i.product.seller==seller:
+            myorder.append(i)
+
+    return render(request,'seller_view_order.html',{'myorder':myorder})
